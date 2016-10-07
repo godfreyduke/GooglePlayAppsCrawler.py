@@ -1,5 +1,4 @@
-from lxml import etree
-from io import StringIO
+import lxml.html
 from decimal import Decimal
 
 class XPath:
@@ -48,7 +47,7 @@ class parser:
         app_data = dict()
 
         # Loading Html
-        html_map = etree.parse(StringIO(html), etree.HTMLParser())
+        html_map = lxml.html.fromstring(html)
 
         # Reaching Useful Data
         app_data['Name'] = self.extract_node_text(html_map, 'Name')
@@ -118,7 +117,7 @@ class parser:
 
     def parse_related_apps(self, html):
         # Loading Html
-        html_map = etree.parse(StringIO(html), etree.HTMLParser())
+        html_map = lxml.html.fromstring(html)
 
         # Reaching Useful Data
         xpath = XPath.xPaths['RelatedApps']
